@@ -1,4 +1,5 @@
 import * as ort from 'onnxruntime-web';
+import { isOfflineMode } from '@/lib/privacy';
 
 export class EnsembleModel {
     private session: ort.InferenceSession | null = null;
@@ -8,7 +9,13 @@ export class EnsembleModel {
         try {
             console.log('[EnsembleModel] Loading ONNX model from:', modelPath);
 
-            // Configure ONNX Runtime for WebAssembly
+            if (isOfflineMode()) {
+                console.warn('[EnsembleModel] Offline mode enabled — skipping ONNX runtime remote setup and model load');
+                this.isLoaded = false;
+                return;
+            }
+
+            // Configure ONNX Runtime for WebAssembly (use local assets if available)
             ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.14.0/dist/';
 
             this.session = await ort.InferenceSession.create(modelPath, {

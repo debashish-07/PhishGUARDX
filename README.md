@@ -152,12 +152,14 @@ http://apple-id-unlock.tk/verify?account=12345
    - ONNX Runtime Web for browser inference
    - Fallback to weighted averaging
 
-### Weighted Scoring Formula
+### Multi-Modal Ensemble Score
 
 ```
 Final Risk = (Heuristic × 0.25) + (Quantum × 0.15) + (Visual × 0.10) 
            + (Transformer × 0.25) + (Ensemble × 0.25)
 ```
+
+Each component contributes proportionally to the final risk assessment, ensuring balanced detection across multiple analysis vectors.
 
 ---
 
@@ -291,6 +293,8 @@ const csv = await exportHistory();
 ✅ **No Data Collection**: Analysis history stored locally only  
 ✅ **No Tracking**: Zero analytics or telemetry  
 ✅ **Offline Capable**: Works without internet connection  
+
+For detailed instructions on privacy and offline mode (how to enable it, behavior and storage guarantees), see `PRIVACY_OFFLINE.md`. For third-party component licensing and attribution notes, see `LICENSE_NOTICE.md`.
 
 ### Security Considerations
 

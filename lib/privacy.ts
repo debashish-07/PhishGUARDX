@@ -21,4 +21,27 @@ function simpleHash(s: string): string {
   return h.toString(16).padStart(8, '0');
 }
 
+// Offline / Privacy mode helper
+const OFFLINE_KEY = 'pd_offline_mode';
+
+export function enableOfflineMode(enabled: boolean) {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem(OFFLINE_KEY, enabled ? '1' : '0');
+    }
+  } catch (e) {
+    // ignore
+  }
+}
+
+export function isOfflineMode(): boolean {
+  try {
+    if (typeof window === 'undefined') return false;
+    const v = window.localStorage.getItem(OFFLINE_KEY);
+    return v === '1';
+  } catch (e) {
+    return false;
+  }
+}
+
 

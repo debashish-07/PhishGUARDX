@@ -80,9 +80,13 @@ export function useDetection() {
             console.log(`[Detector] Transformer Score: ${transformerScore.toFixed(2)}/100`);
 
             // Instantiate Workers for parallel processing
-            const quantumWorker = new Worker(new URL('../workers/quantum_hash.worker.ts', import.meta.url));
-            const visualWorker = new Worker(new URL('../workers/visual_dna.worker.ts', import.meta.url));
-            const mfccWorker = new Worker(new URL('../workers/mfcc.worker.ts', import.meta.url));
+            const disableQuantum = typeof window !== 'undefined' && localStorage.getItem('pd_disable_quantum') === '1';
+            const disableVisual = typeof window !== 'undefined' && localStorage.getItem('pd_disable_visual') === '1';
+            const disableAudio = typeof window !== 'undefined' && localStorage.getItem('pd_disable_audio') === '1';
+
+            const quantumWorker = disableQuantum ? null : new Worker(new URL('../workers/quantum_hash.worker.ts', import.meta.url));
+            const visualWorker = disableVisual ? null : new Worker(new URL('../workers/visual_dna.worker.ts', import.meta.url));
+            const mfccWorker = disableAudio ? null : new Worker(new URL('../workers/mfcc.worker.ts', import.meta.url));
 
             const runWorker = (worker: Worker, data: any, name: string) => {
                 console.log(`[Detector] Module: ${name} started...`);
@@ -98,14 +102,14 @@ export function useDetection() {
 
             // 3. Quantum, 4. Visual, 5. Audio (Parallel)
             const [quantumData, visualData, mfccData] = await Promise.all([
-                runWorker(quantumWorker, { url }, 'Quantum Hashing'),
-                runWorker(visualWorker, { url }, 'Visual DNA'),
-                runWorker(mfccWorker, { url }, 'MFCC Audio')
+                quantumWorker ? runWorker(quantumWorker, { url }, 'Quantum Hashing') : Promise.resolve(Array.from({ length: 64 }, () => 0)),
+                visualWorker ? runWorker(visualWorker, { url }, 'Visual DNA') : Promise.resolve(Array.from({ length: 16 }, () => Array.from({ length: 16 }, () => 0))),
+                mfccWorker ? runWorker(mfccWorker, { url }, 'MFCC Audio') : Promise.resolve(Array.from({ length: 64 }, () => 0))
             ]);
 
-            quantumWorker.terminate();
-            visualWorker.terminate();
-            mfccWorker.terminate();
+            quantumWorker && quantumWorker.terminate();
+            visualWorker && visualWorker.terminate();
+            mfccWorker && mfccWorker.terminate();
 
             // Calculate Scores for Worker features
             const quantumScore = (quantumData.reduce((a: number, b: number) => a + Math.abs(b), 0) / quantumData.length) * 100;

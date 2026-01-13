@@ -1,5 +1,6 @@
 // transformers.js model helpers: lazy pipelines with WebGPU/WASM fallback and caching
 
+import { isOfflineMode } from './privacy';
 import type { PipelineType } from "@xenova/transformers";
 
 type Backend = "webgpu" | "wasm" | "cpu";
@@ -16,6 +17,15 @@ function detectBackend(): Backend {
 export async function getTextClassificationPipeline(
   model = "Xenova/distilbert-base-uncased-finetuned-sst-2-english"
 ) {
+  // If offline/privacy mode is enabled, do not import remote model libraries.
+  if (isOfflineMode()) {
+    // Provide a lightweight stub pipeline that never performs network calls.
+    return async function stubPipeline(text: string, opts?: any) {
+      // Return empty classification so callers fall back to heuristics
+      return [] as { label: string; score: number }[];
+    };
+  }
+
   const backend = detectBackend();
   transformersImport = transformersImport || (await import("@xenova/transformers"));
   const { pipeline, env } = transformersImport;
@@ -38,6 +48,8 @@ export async function classifyText(
   timeoutMs: number = 1500
 ): Promise<{ label: string; score: number }[]> {
   try {
+    if (isOfflineMode()) return [];
+
     const pipePromise = getTextClassificationPipeline();
     const infer = async () => {
       const pipe = await pipePromise;
@@ -56,6 +68,10 @@ export async function classifyText(
 
 export async function preloadModels(onProgress?: (msg: string) => void) {
   try {
+    if (isOfflineMode()) {
+      onProgress?.("offline mode - models disabled");
+      return;
+    }
     onProgress?.("initializing pipeline");
     const pipe = await getTextClassificationPipeline();
     onProgress?.("warming up");
