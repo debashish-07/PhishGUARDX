@@ -1,0 +1,43 @@
+# Vercel Deployment Configuration
+
+# Build settings
+[build
+]
+  command = "npm run build"
+  publish = "out"
+
+# Environment variables (if needed)
+[build.environment
+]
+  NODE_VERSION = "18"
+
+# Headers for security
+[
+    [headers
+    ]
+]
+  for = "/*"[headers.values
+]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Cache static assets
+[
+    [headers
+    ]
+]
+  for = "/_next/static/*"[headers.values
+]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache images
+[
+    [headers
+    ]
+]
+  for = "/images/*"[headers.values
+]
+    Cache-Control = "public, max-age=31536000, immutable"
