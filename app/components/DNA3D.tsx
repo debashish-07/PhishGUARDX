@@ -32,7 +32,7 @@ export function DNA3D({ input, className = '', width = 400, height = 400 }: DNA3
       sceneRef.current = createDNA3DVisualization(canvasRef.current, input);
       setIsLoading(false);
     } catch (err) {
-      console.error('Failed to create 3D DNA visualization:', err);
+      console.error('Failed to create 3D structure visualization:', err);
       setError(err instanceof Error ? err.message : 'Failed to render 3D visualization');
       setIsLoading(false);
     }
@@ -55,7 +55,7 @@ export function DNA3D({ input, className = '', width = 400, height = 400 }: DNA3
       />
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg">
-          <div className="text-cyan-400 animate-pulse">Generating 3D DNA...</div>
+          <div className="text-cyan-400 animate-pulse">Generating 3D structure...</div>
         </div>
       )}
       {error && (

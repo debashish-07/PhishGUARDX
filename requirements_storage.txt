@@ -1,0 +1,30 @@
+# PhishGuardX Storage Requirements (Academic Scope)
+# Local ledger + optional local cache for moderate usage
+# Updated: April 17, 2026
+
+# Core utilities
+python-json-logger==2.0.7
+jsonschema==4.20.0
+pyyaml==6.0.1
+
+# Optional local cache
+redis==5.0.1
+hiredis==2.2.3
+
+# Local file monitoring and helper tools
+watchdog==3.0.0
+cachetools==5.3.2
+
+# Security and config
+python-dotenv==1.0.0
+cryptography==41.0.7
+
+# Testing for storage components
+pytest==7.4.3
+pytest-asyncio==0.21.1
+fakeredis==2.20.0
+
+# Notes:
+# 1) This file is intentionally simple for final-year project scope.
+# 2) Storage is local JSON-based by default.
+# 3) No cloud or enterprise-only dependencies are required.

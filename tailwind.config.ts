@@ -3,6 +3,7 @@ import type { Config } from 'tailwindcss'
 export default {
   content: [
     './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './lib/**/*.{ts,tsx}',
   ],
@@ -98,6 +99,11 @@ export default {
         'purple-glow': '0 0 20px rgba(139, 92, 246, 0.3)',
         'teal-glow': '0 0 20px rgba(20, 184, 166, 0.3)',
         'danger-glow': '0 0 20px rgba(239, 68, 68, 0.3)',
+      },
+      animationDelay: {
+        '100': '100ms',
+        '200': '200ms',
+        '300': '300ms',
       },
     },
   },

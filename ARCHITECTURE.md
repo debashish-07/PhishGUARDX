@@ -1,40 +1,123 @@
-# Architecture Documentation
+# PhishGuardX Architecture
 
-## 1. System Overview
-The Phishing Detector is a privacy-first, browser-native application designed to detect phishing websites in real-time using a hybrid ensemble of quantum-inspired hashing, visual analysis, and audio signal processing.
+## Current System Architecture
 
-## 2. Component Architecture
+PhishGuardX is a hybrid phishing URL detection system with API-driven analysis and explainable output.
+The architecture below reflects the current implementation used by backend runtime.
 
-### 2.1 Frontend (Next.js)
-- **Dashboard**: Visualizes risk scores and feature maps (Quantum, Visual DNA, MFCC).
-- **Hooks**: `useDetection` manages the detection lifecycle and worker communication.
-- **Workers**:
-    - `quantum_hash.worker.ts`: Computes quantum-inspired hash of the URL.
-    - `visual_dna.worker.ts`: Generates a visual grid representing URL structure.
-    - `mfcc.worker.ts`: Simulates audio spectrum analysis of the URL.
+## High-Level Pipeline
 
-### 2.2 Backend (FastAPI) - Optional
-- **Federated Learning API**: Endpoints for receiving model updates from clients.
-- **Update Server**: Distributes signed model updates to clients.
-- **Heavy Compute**: Fallback for complex deep learning tasks (if enabled).
+User -> API -> Feature Extraction -> Hybrid Scoring -> Rule Overrides -> Result -> Trust Ledger -> UI
 
-### 2.3 Data Flow
-1. **Input**: User enters a URL.
-2. **Feature Extraction**: 
-    - URL is sent to parallel WebWorkers.
-    - Features (Hash, DNA, MFCC) are computed locally.
-3. **Inference**:
-    - Features are aggregated in the `useDetection` hook.
-    - `EnsembleModel` (ONNX Runtime) predicts the phishing probability.
-4. **Visualization**: Results are rendered in the Dashboard.
-5. **Feedback (Optional)**: User feedback is sent to the backend for federated learning.
+## Runtime Flow (Detailed)
 
-## 3. Design Rationale
-- **Privacy-First**: All detection logic runs in the browser. No user data leaves the device unless explicitly opted-in for feedback.
-- **Scalability**: WebWorkers ensure the UI remains responsive (<500ms latency).
-- **Modularity**: Components are decoupled, allowing for easy updates and experiments.
+1. Feature extraction
+2. ML + heuristic + HTTPS weighted score
+3. Base risk score
+4. Trusted-domain adjustment
+5. UUID/obfuscated-path adjustment
+6. Rule overrides
+7. Uncertainty-band classification
+8. Explainability packaging and ledger append
 
-## 4. Future Work
-- **True Federated Learning**: Implement secure aggregation protocol.
-- **Mobile Support**: Port the detection engine to React Native.
-- **Browser Extension**: Package the core logic as a Chrome/Firefox extension.
+## Core Components
+
+### API Layer
+
+- Entry routes accept URL scan requests.
+- Route handlers delegate to core detection engine.
+
+### Detection Orchestrator
+
+Module: backend/core_detection.py
+
+Responsibilities:
+
+- call feature extraction and risk computation
+- build reasons and confidence metadata
+- append audit block to trust ledger
+- return normalized response object
+
+### Feature Extraction
+
+Module: backend/feature_extraction.py
+
+Outputs deterministic URL signals including:
+
+- https, url_length, special_ratio
+- keyword and structural token indicators
+- suspicious host/path indicators
+- uuid/hash-like segment indicators
+
+### Hybrid Scoring
+
+Module: backend/scoring_engine.py
+
+Base score:
+
+Risk_base = clamp01(0.72 * ML + 0.23 * Heuristic + 0.05 * HTTPS_risk)
+
+Post-score policies:
+
+- apply_domain_trust()
+- detect_uuid_pattern()
+- adjust_path_risk()
+- apply_rule_overrides()
+- classify_with_uncertainty()
+
+### Rule Engine
+
+Module: backend/rule_engine.py
+
+Provides deterministic override logic and heuristic risk behavior for known suspicious signals.
+
+### Trust Ledger
+
+Module: backend/ledger.py
+
+Stores hash-linked scan records to support auditability and integrity checking.
+
+## Classification Policy
+
+Threshold band:
+
+- safe: risk < 0.45
+- suspicious: 0.45 <= risk <= 0.70
+- phishing: risk > 0.70
+
+This uncertainty band reduces unstable label flipping near boundaries.
+
+## Trusted-Domain Policy
+
+Current trusted domains include:
+
+- google.com
+- chatgpt.com
+- microsoft.com
+- openai.com
+- github.com
+- apple.com
+
+Policy behavior:
+
+- Apply risk reduction after base score for trusted domains.
+- Do not bypass obfuscation checks.
+- Keep reasons explicit in output.
+
+## Obfuscation Policy
+
+Path patterns include:
+
+- UUID format
+- long hexadecimal segments
+- long random alphanumeric segments
+
+Behavior:
+
+- untrusted domain -> stronger risk increase
+- trusted domain -> softened increase
+
+## Notes
+
+This document is the authoritative architecture summary for current PhishGuardX behavior.
+Legacy experimental narratives are not part of the active backend detection design.

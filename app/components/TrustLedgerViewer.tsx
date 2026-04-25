@@ -3,10 +3,21 @@
 import { useEffect, useState } from 'react';
 import { TrustLedger, LedgerEntry, LedgerStats } from '../utils/trustLedger';
 
+interface PinnedURL {
+    url: string;
+    note: string;
+    addedAt: number;
+    snapshotId?: string | null;
+    snapshotTimestamp?: number | null;
+    snapshotRiskScore?: number | null;
+    snapshotVerdict?: string | null;
+    snapshotHash?: string | null;
+}
+
 export function TrustLedgerViewer() {
     const [entries, setEntries] = useState<LedgerEntry[]>([]);
     const [prevUrlMap, setPrevUrlMap] = useState<Record<string, string>>({});
-    const [pinned, setPinned] = useState<Array<{url:string;note?:string;addedAt?:number}>>([]);
+    const [pinned, setPinned] = useState<PinnedURL[]>([]);
     const [stats, setStats] = useState<LedgerStats | null>(null);
     const [loading, setLoading] = useState(true);
     const [showAll, setShowAll] = useState(false);
@@ -167,7 +178,7 @@ export function TrustLedgerViewer() {
                     <div className="text-3xl">🔗</div>
                     <div>
                         <h3 className="text-2xl font-bold text-cyan-400">Local Trust Ledger</h3>
-                        <p className="text-sm text-gray-400">Blockchain-inspired audit trail</p>
+                        <p className="text-sm text-gray-400">Hash-linked audit trail</p>
                     </div>
                 </div>
                 <div className="flex gap-2">

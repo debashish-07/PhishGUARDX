@@ -1,0 +1,60 @@
+flowchart LR
+    subgraph C[Client Layer]
+        U[User / Analyst]
+        FE[Next.js UI\nURL Scanner + Dashboard + Ledger Table]
+    end
+
+    subgraph A[API Layer - FastAPI]
+        DAPI[POST /api/detect/url]
+        RAPI[POST /api/report/pdf]
+        LAPI[GET /api/ledger/]
+    end
+
+    subgraph E[Detection Engine]
+        CORE[CoreDetectionEngine]
+        FX[Feature Extraction]
+        SCORE[Hybrid Scoring\n0.72 ML + 0.23 Heuristic + 0.05 HTTPS]
+        RULES[Rule Overrides]
+        LABEL[Label + Confidence + Reasons]
+    end
+
+    subgraph M[Model + Report]
+        MODEL[(RF/XGBoost\ncore_model.pkl)]
+        FALLBACK[Fallback Logistic]
+        REPORT[PDF Report Builder]
+    end
+
+    subgraph S[Trust + Storage]
+        LEDGER[TrustLedger\nappend + verify]
+        CHAIN[(trust_ledger.json)]
+        CAP[Retention: latest 50 blocks]
+        BENCH[(benchmark_results.csv)]
+    end
+
+    U --> FE
+    FE -->|Scan URL| DAPI
+    FE -->|Download Report| RAPI
+    FE -->|Fetch Audit Trail| LAPI
+
+    DAPI --> CORE
+    RAPI --> CORE
+    LAPI --> LEDGER
+
+    CORE --> FX --> SCORE
+    SCORE --> MODEL
+    SCORE --> FALLBACK
+    SCORE --> RULES --> LABEL --> CORE
+
+    CORE -->|Write block| LEDGER --> CHAIN
+    LEDGER --> CAP
+
+    CORE --> REPORT --> RAPI
+    CORE -->|Result JSON| DAPI --> FE
+    LEDGER -->|Blocks + chain_valid| LAPI --> FE
+
+    subgraph T[Offline Training Pipeline]
+        DATA[Dataset CSV] --> TRAIN[Train + Benchmark]
+    end
+
+    TRAIN --> MODEL
+    TRAIN --> BENCH

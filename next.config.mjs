@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable static export for deployment
-  output: 'export',
+  // Temporarily disable static export to fix ONNX Runtime build issue
+  // output: 'export',
 
   reactStrictMode: true,
 
@@ -17,7 +17,10 @@ const nextConfig = {
     optimizePackageImports: ["@xenova/transformers", "onnxruntime-web"],
   },
 
-  webpack: (config) => {
+  // Disable minification to avoid Terser issue with ONNX Runtime files
+  swcMinify: false,
+
+  webpack: (config, { isServer }) => {
     // Prevent bundling native Node bindings in the browser
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
@@ -32,6 +35,11 @@ const nextConfig = {
       os: false,
       crypto: false,
     };
+
+    // Disable minification for client builds
+    if (!isServer) {
+      config.optimization.minimize = false;
+    }
 
     return config;
   },

@@ -1,0 +1,51 @@
+{
+  "correlation": [
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  ],
+  "mi": {
+    "Heuristics \u2194 Phase-Encoded": 0.5152573976546546,
+    "Heuristics \u2194 Spatial": 0.5152573976546546,
+    "Heuristics \u2194 Frequency": 0.5152573976546546,
+    "Heuristics \u2194 Transformer": 0.5152573976546546,
+    "Phase-Encoded \u2194 Spatial": 0.5152573976546546,
+    "Phase-Encoded \u2194 Frequency": 0.5152573976546546,
+    "Phase-Encoded \u2194 Transformer": 0.5152573976546546,
+    "Spatial \u2194 Frequency": 0.5152573976546546,
+    "Spatial \u2194 Transformer": 0.5152573976546546,
+    "Frequency \u2194 Transformer": 0.5152573976546546
+  }
+}

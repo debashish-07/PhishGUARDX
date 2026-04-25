@@ -1,11 +1,11 @@
-const ctx: Worker = self as any;
+const visualCtx: Worker = self as any;
 
-function seededRandom(seed: number) {
+function seededRandomVisual(seed: number) {
     const x = Math.sin(seed++) * 10000;
     return x - Math.floor(x);
 }
 
-ctx.onmessage = (event: MessageEvent) => {
+visualCtx.onmessage = (event: MessageEvent) => {
     const { url } = event.data;
 
     let seed = 0;
@@ -19,10 +19,10 @@ ctx.onmessage = (event: MessageEvent) => {
     for (let i = 0; i < 10; i++) {
         const row = [];
         for (let j = 0; j < 10; j++) {
-            row.push(seededRandom(seed + i * 10 + j));
+            row.push(seededRandomVisual(seed + i * 10 + j));
         }
         grid.push(row);
     }
 
-    ctx.postMessage(grid);
+    visualCtx.postMessage(grid);
 };

@@ -1,0 +1,15 @@
+{
+  "count": 10000,
+  "phishing_count": 5000,
+  "legitimate_count": 5000,
+  "date_range": {
+    "start": "2025-02-01 00:00:00",
+    "end": "2025-06-29 00:00:00"
+  },
+  "source": "synthetic",
+  "source_files": {
+    "phishing": [],
+    "legitimate": null
+  },
+  "feature_count": 10
+}

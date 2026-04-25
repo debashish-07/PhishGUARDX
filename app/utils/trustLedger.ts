@@ -1,7 +1,7 @@
 /**
- * Local Trust Ledger - Blockchain-Inspired Audit Trail
+ * Local Trust Ledger - Hash-Linked Audit Trail
  * 
- * This module implements a blockchain-style ledger for recording
+ * This module implements a local hash-linked ledger for recording
  * all phishing detection scans with hash-chaining for integrity.
  */
 
@@ -38,7 +38,7 @@ const WATCH_STORE = 'watchedUrls';
 const DB_VERSION = 2;
 
 /**
- * Simple hash function for blockchain-style chaining
+ * Simple hash function for hash-linked chaining
  */
 async function simpleHash(data: string): Promise<string> {
   const encoder = new TextEncoder();
@@ -190,7 +190,7 @@ export class TrustLedger {
   }
 
   /**
-   * Verify the integrity of the blockchain chain
+  * Verify the integrity of the hash-linked chain
    */
   static async verifyChain(): Promise<boolean> {
     const entries = await this.getAllEntries();

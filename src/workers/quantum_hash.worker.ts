@@ -1,12 +1,12 @@
-const ctx: Worker = self as any;
+const quantumCtx: Worker = self as any;
 
 // Simple seeded random number generator
-function seededRandom(seed: number) {
+function seededRandomQuantum(seed: number) {
     const x = Math.sin(seed++) * 10000;
     return x - Math.floor(x);
 }
 
-ctx.onmessage = (event: MessageEvent) => {
+quantumCtx.onmessage = (event: MessageEvent) => {
     const { url } = event.data;
 
     // Create a deterministic seed from the URL
@@ -19,8 +19,8 @@ ctx.onmessage = (event: MessageEvent) => {
     // Generate deterministic "quantum" features
     const features = [];
     for (let i = 0; i < 64; i++) {
-        features.push(seededRandom(seed + i));
+        features.push(seededRandomQuantum(seed + i));
     }
 
-    ctx.postMessage(features);
+    quantumCtx.postMessage(features);
 };

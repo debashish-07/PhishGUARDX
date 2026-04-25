@@ -1,66 +1,28 @@
-import os
-import pandas as pd
-import time
-import numpy as np
-from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, confusion_matrix
+from __future__ import annotations
 
-# Configuration
-DATA_DIR = os.path.join(os.path.dirname(__file__), '../datasets')
-PROCESSED_DIR = os.path.join(DATA_DIR, 'processed')
-DATASET_FILE = os.path.join(PROCESSED_DIR, 'dataset.csv')
+from pathlib import Path
+import sys
 
-# Mock Model / Heuristics for Baseline
-# In a real scenario, this would import the actual detection logic or call the API
-def mock_predict(url):
-    # Simple heuristic for demonstration: long URLs or suspicious keywords are phishing
-    suspicious_keywords = ['login', 'verify', 'account', 'update', 'secure', 'banking']
-    if len(url) > 50:
-        return 1
-    for kw in suspicious_keywords:
-        if kw in url.lower():
-            return 1
-    return 0
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-def evaluate():
-    if not os.path.exists(DATASET_FILE):
-        print(f"Dataset not found at {DATASET_FILE}. Run preprocess.py first.")
-        return
+from backend.models import train_and_benchmark_models
 
-    print("Loading dataset...")
-    df = pd.read_csv(DATASET_FILE)
-    
-    print(f"Evaluating on {len(df)} samples...")
-    
-    y_true = df['label'].values
-    y_pred = []
-    latencies = []
-    
-    for url in df['url']:
-        start_time = time.time()
-        # TODO: Replace with actual model call
-        pred = mock_predict(url)
-        end_time = time.time()
-        
-        y_pred.append(pred)
-        latencies.append((end_time - start_time) * 1000) # ms
-        
-    y_pred = np.array(y_pred)
-    
-    # Metrics
-    precision = precision_score(y_true, y_pred)
-    recall = recall_score(y_true, y_pred)
-    f1 = f1_score(y_true, y_pred)
-    accuracy = accuracy_score(y_true, y_pred)
-    avg_latency = np.mean(latencies)
-    
-    print("\n--- Evaluation Results ---")
-    print(f"Accuracy:  {accuracy:.4f}")
-    print(f"Precision: {precision:.4f}")
-    print(f"Recall:    {recall:.4f}")
-    print(f"F1 Score:  {f1:.4f}")
-    print(f"Avg Latency: {avg_latency:.2f} ms")
-    print("\nConfusion Matrix:")
-    print(confusion_matrix(y_true, y_pred))
+
+def evaluate() -> None:
+    print("Running production benchmark comparison...")
+    table = train_and_benchmark_models(
+        dataset_path=None,
+        save_model_path="backend/models/core_model.pkl",
+        save_benchmark_path="evaluation/benchmark_results.csv",
+        random_state=42,
+    )
+    print("\nModel comparison (Accuracy / Precision / Recall / F1):")
+    print(table.to_string(index=False))
+    print("\nSaved benchmark table to evaluation/benchmark_results.csv")
+    print("Saved Random Forest primary model to backend/models/core_model.pkl")
+
 
 if __name__ == "__main__":
     evaluate()

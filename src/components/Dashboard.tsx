@@ -1,37 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { QuantumRiskMap } from './visualizations/QuantumRiskMap';
-import { VisualDNA } from './visualizations/VisualDNA';
-import { UrlHeatmap } from './visualizations/UrlHeatmap';
-import { ExplainPanel } from '@/app/components/ExplainPanel';
-// New feature imports
-import { TrustLedgerViewer } from '@/app/components/TrustLedgerViewer';
-import { AudioSpectrogram } from '@/app/components/AudioSpectrogram';
-import { QuantumWaveform } from '@/app/components/QuantumWaveform';
-import { DNAStripe } from '@/app/components/DNAStripe';
-import { EnhancedExplainability } from '@/app/components/EnhancedExplainability';
-import { TrustLedger } from '@/app/utils/trustLedger';
+import React, { useState } from 'react';
+import type { DetectionResult } from '@/src/hooks/useDetection';
+import { LedgerTable } from './LedgerTable';
 
 interface DashboardProps {
     url: string;
-    result: {
-        score: number;
-        details: {
-            quantum: number[];
-            visual: number[][];
-            audio: number[];
-        };
-        breakdown?: {
-            heuristic: number;
-            quantum: number;
-            visual: number;
-            transformer: number;
-            ensemble: number;
-        };
-        explain?: {
-            attributions: any[];
-            heatmap: any[];
-        };
-    } | null;
+    result: DetectionResult | null;
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ result, url }) => {
@@ -42,25 +15,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ result, url }) => {
     const handleGenerateReport = async () => {
         setIsGeneratingReport(true);
         try {
-            // Dynamic import to reduce bundle size
-            const { generateAndDownloadReport } = await import('@/src/lib/reportGenerator');
-
-            const verdict = result.score > 0.7 ? 'phishing' : result.score > 0.4 ? 'suspicious' : 'safe';
-
-            await generateAndDownloadReport({
-                url,
-                timestamp: Date.now(),
-                score: result.score,
-                breakdown: result.breakdown || {
-                    heuristic: 0,
-                    quantum: 0,
-                    visual: 0,
-                    transformer: 0,
-                    ensemble: 0
-                },
-                explain: result.explain || { attributions: [], heatmap: [] },
-                verdict
+            const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8000';
+            const response = await fetch(`${backendBase}/api/report/pdf`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url }),
             });
+
+            if (!response.ok) {
+                throw new Error(`Report generation failed (${response.status})`);
+            }
+
+            const blob = await response.blob();
+            const objectUrl = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = objectUrl;
+            link.download = `phishguardx-report-${Date.now()}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(objectUrl);
         } catch (error) {
             console.error('Failed to generate report:', error);
         } finally {
@@ -68,207 +42,86 @@ export const Dashboard: React.FC<DashboardProps> = ({ result, url }) => {
         }
     };
 
-    // Add to Trust Ledger when result changes
-    useEffect(() => {
-        if (result && url) {
-            const addToLedger = async () => {
-                try {
-                    await TrustLedger.addEntry(
-                        url,
-                        result.score * 100, // Convert to percentage
-                        {
-                            heuristic: result.breakdown?.heuristic || 0,
-                            quantum: result.breakdown?.quantum || 0,
-                            visual: result.breakdown?.visual || 0,
-                            transformer: result.breakdown?.transformer || 0,
-                            ensemble: result.breakdown?.ensemble || 0,
-                        }
-                    );
-                } catch (error) {
-                    console.error('Failed to add to trust ledger:', error);
-                }
-            };
-            addToLedger();
-        }
-    }, [result, url]);
+    const riskPercent = (result.risk_score * 100).toFixed(1);
 
     return (
-        <div className="mt-8 space-y-8" data-testid="dashboard-ready">
-            {/* Risk Score Header */}
-            <div className="text-center p-8 glass rounded-xl border border-gray-700 animate-slide-up">
-                <div className="text-sm text-gray-400 mb-2 uppercase tracking-wider">Risk Assessment</div>
-                <div className="text-7xl font-bold mb-4">
+        <div id="dashboard" className="mt-4 space-y-4" data-testid="dashboard-ready">
+            <div className="rounded border border-slate-300 bg-white p-6">
+                <div className="mb-2 text-xs uppercase tracking-wide text-slate-500">Risk Assessment</div>
+                <div className="mb-3 text-4xl font-semibold sm:text-5xl">
                     <span className={
-                        result.score > 0.7 ? 'text-red-500' :
-                            result.score > 0.4 ? 'text-yellow-500' :
+                        result.label === 'phishing' ? 'text-red-500' :
+                            result.label === 'suspicious' ? 'text-yellow-500' :
                                 'text-green-500'
                     }>
-                        {(result.score * 100).toFixed(1)}%
+                        {riskPercent}%
                     </span>
                 </div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/50 bg-green-800/20 text-green-300 text-xs" data-testid="analysis-complete-badge">
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-slate-100 px-4 py-2 text-sm text-slate-700" data-testid="analysis-complete-badge">
                     <span>✓ Analysis Complete</span>
                 </div>
-                <div className="text-lg mb-4">
-                    {result.score > 0.7 ? (
-                        <span className="text-red-400 font-semibold">⚠️ High Risk - Likely Phishing</span>
-                    ) : result.score > 0.4 ? (
-                        <span className="text-yellow-400 font-semibold">⚡ Suspicious - Exercise Caution</span>
-                    ) : (
-                        <span className="text-green-400 font-semibold">✓ Low Risk - Appears Safe</span>
-                    )}
+                <div className="mb-2 text-2xl sm:text-3xl">
+                    <span className="font-semibold text-slate-900">{result.status}</span>
                 </div>
+                <p className="mb-2 text-base text-slate-700">{result.summary}</p>
+                <p className="text-sm text-slate-600">Recommended action: {result.recommended_action}</p>
 
-                {/* Generate Report Button */}
                 <button
                     onClick={handleGenerateReport}
                     disabled={isGeneratingReport}
-                    className="mt-4 px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="mt-4 rounded bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-slate-400"
                 >
-                    {isGeneratingReport ? '📄 Generating...' : '📄 Download PDF Report'}
+                    {isGeneratingReport ? 'Generating PDF...' : 'Download PDF Report'}
                 </button>
             </div>
 
-
-            {/* 🌟 SECTION 1: Advanced Visualizations (NEW FEATURES) */}
-            <div className="animate-slide-up delay-100">
-                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600 mb-6 flex items-center">
-                    <span className="mr-3">🌟</span>
-                    Advanced Visualizations
-                </h2>
-                <div className="space-y-6">
-                    {/* Quantum Waveform */}
-                    {result.details.quantum && result.details.quantum.length > 0 && (
-                        <QuantumWaveform
-                            features={result.details.quantum}
-                            riskScore={result.score * 100}
-                        />
-                    )}
-
-                    {/* Audio Spectrogram */}
-                    <AudioSpectrogram url={url} />
-
-                    {/* DNA Stripe */}
-                    <DNAStripe url={url} />
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2" data-testid="analysis-complete">
+                <div className="rounded border border-slate-300 bg-white p-5">
+                    <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-600">Decision Summary</h3>
+                    <div className="space-y-1.5 text-sm text-slate-700">
+                        <p><span className="text-slate-500">Risk level:</span> {result.risk_level}</p>
+                        <p><span className="text-slate-500">Confidence:</span> {result.confidence}</p>
+                        <p><span className="text-slate-500">Model source:</span> {result.model_source}</p>
+                        <p><span className="text-slate-500">Ledger:</span> {result.ledger_valid ? 'Valid' : 'Invalid'}</p>
+                    </div>
+                </div>
+                <div className="rounded border border-slate-300 bg-white p-5">
+                    <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-600">Top Reasons</h3>
+                    <ul className="space-y-1.5 text-sm text-slate-700">
+                        {result.reasons.slice(0, 3).map((reason, idx) => (
+                            <li key={`${reason}-${idx}`} className="flex items-start gap-2">
+                                <span className="text-slate-500">•</span>
+                                <span>{reason}</span>
+                            </li>
+                        ))}
+                        {result.reasons.length === 0 && <li>No strong phishing indicators.</li>}
+                    </ul>
                 </div>
             </div>
 
-            {/* 📊 SECTION 2: Multi-Modal Analysis (CORE FEATURES) */}
-            <div className="animate-slide-up delay-200" data-testid="analysis-complete">
-                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-6 flex items-center">
-                    <span className="mr-3">📊</span>
-                    Multi-Modal Analysis
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Quantum Risk Map */}
-                    <div className="glass p-6 rounded-xl border border-purple-500/30 hover:border-purple-500/60 transition-all">
-                        <h3 className="text-purple-400 font-bold mb-4 flex items-center text-lg">
-                            <span className="mr-2">🔮</span>
-                            Quantum Risk Map
-                        </h3>
-                        <QuantumRiskMap data={result.details.quantum} />
-                        <p className="text-xs text-gray-500 mt-3">
-                            Quantum-inspired hashing reveals structural anomalies
-                        </p>
-                    </div>
+            <div className="rounded border border-slate-300 bg-white p-5">
+                <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-600">Core Signals</h3>
+                <div className="grid grid-cols-2 gap-3 text-sm text-slate-700 md:grid-cols-3">
+                    <div>ML probability: {result.signals.ml_probability.toFixed(4)}</div>
+                    <div>Heuristic risk: {result.signals.heuristic_risk.toFixed(4)}</div>
+                    <div>HTTPS present: {result.signals.https_present ? 'Yes' : 'No'}</div>
+                    <div>URL length: {result.signals.url_length}</div>
+                    <div>Subdomain depth: {result.signals.subdomain_depth}</div>
+                    <div>Keyword hits: {result.signals.keyword_hits ?? result.signals.suspicious_token_hits}</div>
+                    <div>Structural flags: {result.signals.structural_hits ?? 0}</div>
+                </div>
+                <p className="mt-4 break-all text-xs text-slate-500">Block hash: {result.block_hash}</p>
+            </div>
 
-                    {/* Visual DNA Pattern */}
-                    <div className="glass p-6 rounded-xl border border-pink-500/30 hover:border-pink-500/60 transition-all">
-                        <h3 className="text-pink-400 font-bold mb-4 flex items-center text-lg">
-                            <span className="mr-2">🧬</span>
-                            Visual DNA Pattern
-                        </h3>
-                        <VisualDNA data={result.details.visual} />
-                        <p className="text-xs text-gray-500 mt-3">
-                            Fingerprint-based structural similarity detection
-                        </p>
-                    </div>
+            <div className="rounded border border-slate-300 bg-white p-5">
+                <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-600">Trust Ledger Audit Trail</h3>
+                <div className="mt-3 space-y-2 text-sm text-slate-700">
+                    <p><span className="text-slate-500">Chain status:</span> {result.ledger_valid ? 'Valid' : 'Invalid'}</p>
+                    <p className="break-all"><span className="text-slate-500">Current block hash:</span> {result.block_hash}</p>
                 </div>
             </div>
 
-            {/* 💡 SECTION 3: Explainability & Attribution */}
-            <div className="animate-slide-up delay-250">
-                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600 mb-6 flex items-center">
-                    <span className="mr-3">💡</span>
-                    Explainability & Attribution
-                </h2>
-
-                {/* URL Character Heatmap */}
-                <div className="mb-6">
-                    <h3 className="text-xl font-semibold text-yellow-400 mb-3 flex items-center">
-                        <span className="mr-2">🔍</span>
-                        Character-Level Risk Attribution
-                    </h3>
-                    <UrlHeatmap url={url} heatmapData={result.explain?.heatmap} />
-                </div>
-
-                {/* Enhanced Explainability Dashboard */}
-                {result.breakdown && (
-                    <div className="mt-6">
-                        <h3 className="text-xl font-semibold text-purple-400 mb-3 flex items-center">
-                            <span className="mr-2">📈</span>
-                            Module Contribution Analysis
-                        </h3>
-                        <EnhancedExplainability
-                            moduleScores={{
-                                heuristic: result.breakdown.heuristic,
-                                quantum: result.breakdown.quantum,
-                                visual: result.breakdown.visual,
-                                transformer: result.breakdown.transformer,
-                                ensemble: result.breakdown.ensemble,
-                            }}
-                            triggeredRules={[
-                                {
-                                    id: 'rule-1',
-                                    name: 'Risk Score Analysis',
-                                    reason: `Overall risk score of ${(result.score * 100).toFixed(1)}% indicates ${result.score > 0.7 ? 'high' : result.score > 0.4 ? 'medium' : 'low'} threat level`,
-                                    severity: result.score > 0.7 ? 'high' as const : result.score > 0.4 ? 'medium' as const : 'low' as const,
-                                    impact: result.score * 20,
-                                },
-                            ]}
-                            riskFactors={[
-                                {
-                                    description: 'Multi-modal analysis combining 5 detection methods',
-                                    impact: 15,
-                                    category: 'Methodology',
-                                },
-                            ]}
-                            confidence={85}
-                            finalScore={result.score * 100}
-                        />
-                    </div>
-                )}
-
-                {/* Original Explain Panel (Detailed Token Attribution) */}
-                {result.explain && (
-                    <div className="mt-6">
-                        <h3 className="text-xl font-semibold text-cyan-400 mb-3 flex items-center">
-                            <span className="mr-2">🎯</span>
-                            Detailed Feature Attribution
-                        </h3>
-                        <ExplainPanel
-                            attributions={result.explain.attributions}
-                            heatmapRanges={result.explain.heatmap}
-                            url={url}
-                        />
-                    </div>
-                )}
-            </div>
-
-            {/* 🔗 SECTION 4: Audit Trail */}
-            <div className="animate-slide-up delay-300">
-                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-600 mb-6 flex items-center">
-                    <span className="mr-3">🔗</span>
-                    Blockchain Audit Trail
-                </h2>
-                <TrustLedgerViewer />
-            </div>
-
-            {/* Confidence Indicator */}
-            <div className="text-center text-xs text-gray-500 animate-slide-up delay-300">
-                <p>Analysis powered by 5-module hybrid AI • Privacy-first browser processing</p>
-                <p className="mt-1">Multi-Modal Ensemble: Heuristics (25%) • Quantum (15%) • Visual (10%) • Transformer (25%) • ML Ensemble (25%)</p>
-            </div>
+            <LedgerTable showLimit={20} />
         </div>
     );
 };

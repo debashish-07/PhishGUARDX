@@ -20,19 +20,20 @@ export function QuantumWaveform({ features, riskScore }: QuantumWaveformProps) {
         if (!ctx) return;
 
         let frame = 0;
+        let animationRunning = true;
 
         const animate = () => {
-            if (isPaused) return;
+            if (!animationRunning || isPaused) return;
 
             const width = canvas.width;
             const height = canvas.height;
 
-            // Clear canvas with fade effect
-            ctx.fillStyle = 'rgba(10, 10, 10, 0.1)';
+            // Clear canvas with solid background first
+            ctx.fillStyle = '#0a0a0a';
             ctx.fillRect(0, 0, width, height);
 
             // Draw grid
-            ctx.strokeStyle = 'rgba(100, 100, 100, 0.1)';
+            ctx.strokeStyle = 'rgba(100, 100, 100, 0.2)';
             ctx.lineWidth = 1;
 
             // Horizontal grid lines
@@ -45,7 +46,7 @@ export function QuantumWaveform({ features, riskScore }: QuantumWaveformProps) {
             }
 
             // Center line
-            ctx.strokeStyle = 'rgba(100, 200, 255, 0.2)';
+            ctx.strokeStyle = 'rgba(100, 200, 255, 0.3)';
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(0, height / 2);
@@ -142,6 +143,7 @@ export function QuantumWaveform({ features, riskScore }: QuantumWaveformProps) {
         animate();
 
         return () => {
+            animationRunning = false;
             if (animationRef.current) {
                 cancelAnimationFrame(animationRef.current);
             }
@@ -150,20 +152,6 @@ export function QuantumWaveform({ features, riskScore }: QuantumWaveformProps) {
 
     const togglePause = () => {
         setIsPaused(!isPaused);
-        if (isPaused && canvasRef.current) {
-            // Resume animation
-            const canvas = canvasRef.current;
-            const ctx = canvas.getContext('2d');
-            if (ctx) {
-                let frame = 0;
-                const animate = () => {
-                    if (isPaused) return;
-                    // Animation logic here (same as above)
-                    animationRef.current = requestAnimationFrame(animate);
-                };
-                animate();
-            }
-        }
     };
 
     return (
@@ -172,8 +160,8 @@ export function QuantumWaveform({ features, riskScore }: QuantumWaveformProps) {
                 <div className="flex items-center gap-3">
                     <div className="text-3xl">🌊</div>
                     <div>
-                        <h4 className="text-xl font-bold text-cyan-400">Quantum Waveform</h4>
-                        <p className="text-sm text-gray-400">Phase-encoded quantum signature</p>
+                        <h4 className="text-xl font-bold text-cyan-400">Structural Waveform</h4>
+                        <p className="text-sm text-gray-400">Phase-encoded structural signature</p>
                     </div>
                 </div>
                 <button
@@ -215,8 +203,8 @@ export function QuantumWaveform({ features, riskScore }: QuantumWaveformProps) {
 
             <div className="mt-4 p-3 bg-cyan-900/20 rounded-lg border border-cyan-500/30">
                 <p className="text-xs text-gray-300">
-                    <strong className="text-cyan-400">Quantum Superposition:</strong> The waveform represents the quantum-inspired
-                    feature vector as a superposition of multiple harmonic frequencies. Peaks and troughs indicate structural
+                    <strong className="text-cyan-400">Structural Signature:</strong> The waveform represents the structured
+                    feature vector as a layered combination of harmonic frequencies. Peaks and troughs indicate structural
                     anomalies in the URL, while the color gradient reflects the overall risk assessment.
                 </p>
             </div>

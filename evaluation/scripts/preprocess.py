@@ -6,29 +6,41 @@ import glob
 DATA_DIR = os.path.join(os.path.dirname(__file__), '../datasets')
 RAW_DIR = os.path.join(DATA_DIR, 'raw')
 PROCESSED_DIR = os.path.join(DATA_DIR, 'processed')
+SAMPLE_CSV = os.path.join(os.path.dirname(__file__), '../../datasets/sample_urls.csv')
 
 def load_raw_data():
-    # Find latest openphish file
+    # Aggregate all available openphish files for broader phishing coverage.
     phish_files = glob.glob(os.path.join(RAW_DIR, 'openphish_*.txt'))
     if not phish_files:
         print("No phishing data found.")
         return None, None
-    latest_phish = max(phish_files, key=os.path.getctime)
-    
-    # Find latest benign file
+
+    # Aggregate all available benign files for better calibration.
     benign_files = glob.glob(os.path.join(RAW_DIR, 'benign_*.txt'))
     if not benign_files:
         print("No benign data found.")
         return None, None
-    latest_benign = max(benign_files, key=os.path.getctime)
-    
-    print(f"Processing {latest_phish} and {latest_benign}...")
-    
-    with open(latest_phish, 'r', encoding='utf-8') as f:
-        phish_urls = [line.strip() for line in f if line.strip()]
-        
-    with open(latest_benign, 'r', encoding='utf-8') as f:
-        benign_urls = [line.strip() for line in f if line.strip()]
+
+    print(f"Processing {len(phish_files)} phishing files and {len(benign_files)} benign files...")
+
+    phish_urls = []
+    for file_path in phish_files:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            phish_urls.extend(line.strip() for line in f if line.strip())
+
+    benign_urls = []
+    for file_path in benign_files:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            benign_urls.extend(line.strip() for line in f if line.strip())
+
+    if os.path.exists(SAMPLE_CSV):
+        sample_df = pd.read_csv(SAMPLE_CSV)
+        if {"url", "label"}.issubset(sample_df.columns):
+            sample_phish = sample_df[sample_df["label"].astype(str).str.lower() == "phishing"]["url"].astype(str).tolist()
+            sample_benign = sample_df[sample_df["label"].astype(str).str.lower() == "benign"]["url"].astype(str).tolist()
+            phish_urls.extend(sample_phish)
+            benign_urls.extend(sample_benign)
+            print(f"Included supplemental CSV samples: phishing={len(sample_phish)}, benign={len(sample_benign)}")
         
     return phish_urls, benign_urls
 

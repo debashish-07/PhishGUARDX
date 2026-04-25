@@ -1,0 +1,127 @@
+{
+  "version": "1.0",
+  "framework": "ONNX Runtime Web",
+  "models": {
+    "Heuristics": {
+      "type": "logistic_regression",
+      "input_shape": [
+        1,
+        10
+      ],
+      "output_shape": [
+        1,
+        2
+      ],
+      "file": "heuristics.onnx"
+    },
+    "Phase-Encoded": {
+      "type": "logistic_regression",
+      "input_shape": [
+        1,
+        10
+      ],
+      "output_shape": [
+        1,
+        2
+      ],
+      "file": "phase_encoded.onnx"
+    },
+    "Spatial": {
+      "type": "logistic_regression",
+      "input_shape": [
+        1,
+        10
+      ],
+      "output_shape": [
+        1,
+        2
+      ],
+      "file": "spatial.onnx"
+    },
+    "Frequency": {
+      "type": "logistic_regression",
+      "input_shape": [
+        1,
+        10
+      ],
+      "output_shape": [
+        1,
+        2
+      ],
+      "file": "frequency.onnx"
+    },
+    "Transformer": {
+      "type": "logistic_regression",
+      "input_shape": [
+        1,
+        10
+      ],
+      "output_shape": [
+        1,
+        2
+      ],
+      "file": "transformer.onnx"
+    }
+  },
+  "ensemble": {
+    "strategy": "weighted_average",
+    "weights": {
+      "Heuristics": 0.20000000000001641,
+      "Phase-Encoded": 0.20000000000001641,
+      "Spatial": 0.20000000000001641,
+      "Frequency": 0.20000000000001641,
+      "Transformer": 0.19999999999993442
+    },
+    "threshold": 0.5
+  },
+  "feature_config": {
+    "num_features": 10,
+    "feature_names": [
+      "has_ip",
+      "domain_length",
+      "special_char_count",
+      "entropy",
+      "entropy_normalized",
+      "vowel_ratio",
+      "digit_ratio",
+      "max_char_repeat",
+      "unique_chars",
+      "url_length_normalized"
+    ],
+    "scaler_mean": [
+      0.0,
+      13.4357,
+      0.11893333333333334,
+      1.1475666666666666,
+      3.969577997346358,
+      0.9437786938805361,
+      0.21079033324281568,
+      0.0331387388557575,
+      3.4196333333333335,
+      17.755366666666667
+    ],
+    "scaler_std": [
+      1.0,
+      3.9541453577230663,
+      0.4282384797697308,
+      0.3546699106993838,
+      0.2875342567500887,
+      0.012705935900999476,
+      0.06631147446369105,
+      0.061545881901527044,
+      0.8432918823804446,
+      3.6508795103222784
+    ]
+  },
+  "metadata": {
+    "trained_on": "PhishTank + synthetic phishing patterns",
+    "training_samples": 30000,
+    "validation_samples": 10000,
+    "temporal_test_sets": {
+      "test_3mo": 10000,
+      "test_6mo": 10000,
+      "test_12mo": 10000
+    },
+    "section_reference": "PROJECT_REPORT.md Sections 5.5-5.6"
+  }
+}

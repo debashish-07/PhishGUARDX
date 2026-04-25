@@ -104,3 +104,7 @@ logs/
 # Large datasets (uncomment if needed)
 # /evaluation/datasets/raw/*.txt
 # /evaluation/datasets/processed/*.csv
+
+# Exclude oversized dataset files for GitHub push
+/training/data_1m_benign/full_dataset.csv
+/training/data_1m_benign_full/full_dataset.csv

@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: "Phishing Detector",
-  description: "Client-side phishing detection with transformers.js and WebGPU",
+  title: "PhishGuardX",
+  description: "Privacy-first client-side phishing detection with explainable URL analysis",
 };
 
 export default function RootLayout({

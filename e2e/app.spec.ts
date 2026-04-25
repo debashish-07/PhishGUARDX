@@ -5,24 +5,27 @@ test.describe('Phishing Detector - Browser Tests', () => {
     await page.goto('/');
   });
 
-  test('should load with cyber theme', async ({ page }) => {
+  test('should load with current branding', async ({ page }) => {
     // Check header
     const heading = page.locator('h1');
-    await expect(heading).toContainText('Quantum Phishing Detector');
+    await expect(heading).toContainText('PhishGuardX');
     
     // Check subtitle
-    const subtitle = page.locator('text=Privacy-First');
+    const subtitle = page.locator('text=URL Scanner');
     await expect(subtitle).toBeVisible();
   });
 
-  test('should display model status', async ({ page }) => {
-    const subtitle = page.locator('text=Powered by');
+  test('should display the scanner controls', async ({ page }) => {
+    const subtitle = page.locator('text=URL Scanner');
     await expect(subtitle).toBeVisible();
+
+    const analyzeButton = page.locator('button:has-text("Scan URL")');
+    await expect(analyzeButton).toBeVisible();
   });
 
   test('should analyze low-risk URL', async ({ page }) => {
     const urlInput = page.locator('input[type="text"]').first();
-    const analyzeButton = page.locator('button:has-text("Analyze")');
+    const analyzeButton = page.locator('button:has-text("Scan URL")');
     
     // Enter URL
     await urlInput.fill('https://example.com');
@@ -36,7 +39,7 @@ test.describe('Phishing Detector - Browser Tests', () => {
 
   test('should analyze high-risk URL', async ({ page }) => {
     const urlInput = page.locator('input[type="text"]').first();
-    const analyzeButton = page.locator('button:has-text("Analyze")');
+    const analyzeButton = page.locator('button:has-text("Scan URL")');
     
     // Enter suspicious URL
     await urlInput.fill('http://192.168.1.1/secure-paypal-login/verify?acc=12345');
@@ -51,7 +54,7 @@ test.describe('Phishing Detector - Browser Tests', () => {
 
   test('should show toast notification after analysis', async ({ page }) => {
     const urlInput = page.locator('input[type="text"]').first();
-    const analyzeButton = page.locator('button:has-text("Analyze")');
+    const analyzeButton = page.locator('button:has-text("Scan URL")');
     
     await urlInput.fill('https://example.com');
     await analyzeButton.click();
@@ -74,7 +77,7 @@ test.describe('Phishing Detector - Browser Tests', () => {
 
   test('should export history', async ({ page }) => {
     const heading = page.locator('h1');
-    await expect(heading).toContainText('Quantum Phishing Detector');
+    await expect(heading).toContainText('PhishGuardX');
   });
 
   test('should display analysis history', async ({ page }) => {
@@ -83,11 +86,11 @@ test.describe('Phishing Detector - Browser Tests', () => {
     await page.waitForTimeout(500);
     
     const heading = page.locator('h1');
-    await expect(heading).toContainText('Quantum Phishing Detector');
+    await expect(heading).toContainText('PhishGuardX');
   });
 
   test('should have interactive button hover effects', async ({ page }) => {
-    const analyzeButton = page.locator('button:has-text("Analyze")');
+    const analyzeButton = page.locator('button:has-text("Scan URL")');
     
     // Hover over button
     await analyzeButton.hover();
@@ -98,7 +101,7 @@ test.describe('Phishing Detector - Browser Tests', () => {
 
   test('should show loading spinner during analysis', async ({ page }) => {
     const urlInput = page.locator('input[type="text"]').first();
-    const analyzeButton = page.locator('button:has-text("Analyze")').first();
+    const analyzeButton = page.locator('button:has-text("Scan URL")').first();
     
     await urlInput.fill('https://example.com');
     await analyzeButton.click();
@@ -106,8 +109,8 @@ test.describe('Phishing Detector - Browser Tests', () => {
     // Wait a bit for loading to start
     await page.waitForTimeout(1000);
     
-    // Look for either "Analyze" button or "Scanning..." button during analysis
-    const buttonOrSpinner = page.locator('button:has-text("Scanning")').or(page.locator('button:has-text("Analyze")'));
+    // Look for either the idle button or the loading state during analysis
+    const buttonOrSpinner = page.locator('button:has-text("Scanning")').or(page.locator('button:has-text("Scan URL")'));
     await expect(buttonOrSpinner.first()).toBeVisible({ timeout: 3000 });
   });
 
@@ -124,7 +127,7 @@ test.describe('Phishing Detector - Browser Tests', () => {
 
   test('should display explain panel with attributions', async ({ page }) => {
     const urlInput = page.locator('input[type="text"]').first();
-    const analyzeButton = page.locator('button:has-text("Analyze")');
+    const analyzeButton = page.locator('button:has-text("Scan URL")');
     
     await urlInput.fill('https://example.com');
     await analyzeButton.click();

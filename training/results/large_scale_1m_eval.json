@@ -1,0 +1,93 @@
+{
+  "data_dir": "training\\data_1m_benign_full",
+  "feature_count": 18,
+  "train_samples": 718896,
+  "train_seconds": 6.162640400000328,
+  "class_balance": {
+    "train_phishing": 18856,
+    "train_benign": 700040,
+    "val_phishing": 4062,
+    "val_benign": 149987,
+    "test_phishing": 4082,
+    "test_benign": 149968
+  },
+  "calibration": {
+    "method": "max_f1_under_fpr_constraint",
+    "target_fpr": 0.01,
+    "selected_on_validation": {
+      "threshold": 0.9164782608695653,
+      "f1": 0.9021331609566904,
+      "fpr": 0.001226772986992206,
+      "precision": 0.9499047100462837,
+      "recall": 0.8589364844903988
+    }
+  },
+  "validation": {
+    "default_threshold": {
+      "samples": 154049,
+      "accuracy": 0.9629533460132815,
+      "precision": 0.4134301652457636,
+      "recall": 0.967011324470704,
+      "f1": 0.5792228857922288,
+      "auroc": 0.9917937726275354,
+      "fpr": 0.03715655356797589,
+      "fnr": 0.032988675529295915,
+      "tp": 3928,
+      "tn": 144414,
+      "fp": 5573,
+      "fn": 134,
+      "threshold": 0.5,
+      "inference_latency_ms_per_url": 0.00046352524196951577
+    },
+    "calibrated_threshold": {
+      "samples": 154049,
+      "accuracy": 0.9950859791365085,
+      "precision": 0.9499047100462837,
+      "recall": 0.8589364844903988,
+      "f1": 0.9021331609566904,
+      "auroc": 0.9917937726275354,
+      "fpr": 0.001226772986992206,
+      "fnr": 0.1410635155096012,
+      "tp": 3489,
+      "tn": 149803,
+      "fp": 184,
+      "fn": 573,
+      "threshold": 0.9164782608695653,
+      "inference_latency_ms_per_url": 0.00031733993729389135
+    }
+  },
+  "test": {
+    "default_threshold": {
+      "samples": 154050,
+      "accuracy": 0.9637520285621551,
+      "precision": 0.4203774385072095,
+      "recall": 0.9713375796178344,
+      "f1": 0.5867988752404913,
+      "auroc": 0.9928795490743398,
+      "fpr": 0.03645444361463779,
+      "fnr": 0.028662420382165606,
+      "tp": 3965,
+      "tn": 144501,
+      "fp": 5467,
+      "fn": 117,
+      "threshold": 0.5,
+      "inference_latency_ms_per_url": 0.0004063894839351041
+    },
+    "calibrated_threshold": {
+      "samples": 154050,
+      "accuracy": 0.9954625121713729,
+      "precision": 0.9622847772615468,
+      "recall": 0.8625673689367956,
+      "f1": 0.9097015889419972,
+      "auroc": 0.9928795490743398,
+      "fpr": 0.0009201963085458231,
+      "fnr": 0.1374326310632043,
+      "tp": 3521,
+      "tn": 149830,
+      "fp": 138,
+      "fn": 561,
+      "threshold": 0.9164782608695653,
+      "inference_latency_ms_per_url": 0.0002676234988641689
+    }
+  }
+}

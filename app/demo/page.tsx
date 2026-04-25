@@ -10,14 +10,14 @@ export default function DemoPage() {
     const demoSections = [
         {
             title: '🎯 Project Overview',
-            subtitle: 'Quantum-Inspired Multi-Modal AI for Real-Time Browser Security',
+            subtitle: 'Privacy-First Multi-Modal URL Security',
             content: (
                 <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 p-6 rounded-xl border border-purple-500/30">
                             <h3 className="text-xl font-bold text-purple-300 mb-3">🔬 Key Innovation</h3>
                             <p className="text-gray-300">
-                                First browser-native phishing detection system combining classical ML with quantum-inspired algorithms
+                                First browser-native phishing detection system combining classical ML with structural and semantic signals
                             </p>
                         </div>
                         <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 p-6 rounded-xl border border-blue-500/30">
@@ -29,7 +29,7 @@ export default function DemoPage() {
                         <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 p-6 rounded-xl border border-green-500/30">
                             <h3 className="text-xl font-bold text-green-300 mb-3">🧠 Multi-Modal AI</h3>
                             <p className="text-gray-300">
-                                5 detection modules: Heuristics, Quantum Hash, Visual DNA, Transformer, ML Ensemble
+                                5 detection modules: Heuristics, Structural Hash, Pattern Grid, Transformer, ML Ensemble
                             </p>
                         </div>
                         <div className="bg-gradient-to-br from-orange-900/30 to-red-900/30 p-6 rounded-xl border border-orange-500/30">
@@ -67,15 +67,14 @@ export default function DemoPage() {
             ),
         },
         {
-            title: '🔬 Visual DNA Fingerprint',
-            subtitle: 'Bioinformatics-Inspired URL Structural Analysis',
+            title: '🔬 Pattern Grid Fingerprint',
+            subtitle: 'URL Structural Analysis',
             content: (
                 <div className="space-y-6">
                     <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 p-6 rounded-xl border border-purple-500/20">
-                        <h3 className="text-xl font-bold text-purple-300 mb-4">What is Visual DNA?</h3>
+                        <h3 className="text-xl font-bold text-purple-300 mb-4">What is the Pattern Grid?</h3>
                         <p className="text-gray-300 mb-4">
-                            A novel canvas-based visualization that encodes URL entropy and structural patterns,
-                            inspired by biometric and cryptographic fingerprinting techniques.
+                            A canvas-based visualization that encodes URL entropy and structural patterns for anomaly detection.
                         </p>
                         <ul className="space-y-2 text-gray-300">
                             <li className="flex items-start">
@@ -117,42 +116,41 @@ export default function DemoPage() {
             ),
         },
         {
-            title: '🧠 Quantum State Visualization',
-            subtitle: 'Bloch-Sphere-Inspired Risk Signal Encoding',
+            title: '🧠 Structural Signal Visualization',
+            subtitle: 'URL Structure Risk Encoding',
             content: (
                 <div className="space-y-6">
                     <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 p-6 rounded-xl border border-blue-500/20">
-                        <h3 className="text-xl font-bold text-blue-300 mb-4">Quantum-Inspired Hashing</h3>
+                        <h3 className="text-xl font-bold text-blue-300 mb-4">Structural Hashing</h3>
                         <p className="text-gray-300 mb-4">
-                            Novel feature encoding using quantum superposition metaphors for deterministic
-                            structural anomaly detection.
+                            Deterministic feature encoding that captures structural anomaly patterns.
                         </p>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-500/20">
                                 <div className="text-2xl mb-2">⚛️</div>
-                                <div className="text-sm font-semibold text-blue-300">Superposition Encoding</div>
-                                <div className="text-xs text-gray-400 mt-1">Character-level quantum states</div>
+                                <div className="text-sm font-semibold text-blue-300">Structural Encoding</div>
+                                <div className="text-xs text-gray-400 mt-1">Character-level structural signals</div>
                             </div>
                             <div className="bg-purple-900/30 p-4 rounded-lg border border-purple-500/20">
                                 <div className="text-2xl mb-2">🌀</div>
-                                <div className="text-sm font-semibold text-purple-300">Phase Mapping</div>
-                                <div className="text-xs text-gray-400 mt-1">2D Bloch sphere visualization</div>
+                                <div className="text-sm font-semibold text-purple-300">Signal Mapping</div>
+                                <div className="text-xs text-gray-400 mt-1">2D signal visualization</div>
                             </div>
                             <div className="bg-cyan-900/30 p-4 rounded-lg border border-cyan-500/20">
                                 <div className="text-2xl mb-2">📊</div>
                                 <div className="text-sm font-semibold text-cyan-300">Risk Aggregation</div>
-                                <div className="text-xs text-gray-400 mt-1">Quantum-inspired scoring</div>
+                                <div className="text-xs text-gray-400 mt-1">Structural scoring</div>
                             </div>
                         </div>
                     </div>
 
                     <div className="bg-black/40 p-8 rounded-xl border border-purple-500/20">
-                        <h4 className="text-lg font-bold text-purple-300 mb-4 text-center">Quantum Risk Map Example</h4>
+                        <h4 className="text-lg font-bold text-purple-300 mb-4 text-center">Structural Risk Map Example</h4>
                         <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 h-64 rounded-lg flex items-center justify-center border border-purple-500/30">
                             <div className="text-center">
                                 <div className="text-6xl mb-4">🎯</div>
                                 <div className="text-xl text-purple-300 font-semibold">Interactive Visualization</div>
-                                <div className="text-sm text-gray-400 mt-2">Real-time quantum state rendering</div>
+                                <div className="text-sm text-gray-400 mt-2">Real-time structural signal rendering</div>
                             </div>
                         </div>
                     </div>
@@ -177,7 +175,7 @@ export default function DemoPage() {
 
                             <div className="flex items-center space-x-4">
                                 <div className="bg-blue-500/20 px-4 py-2 rounded-lg border border-blue-500/30 min-w-[150px]">
-                                    <div className="text-sm font-semibold text-blue-300">Quantum Hash</div>
+                                    <div className="text-sm font-semibold text-blue-300">Structural Hash</div>
                                     <div className="text-xs text-gray-400">15% weight</div>
                                 </div>
                                 <div className="flex-1 h-1 bg-gradient-to-r from-blue-500/30 to-cyan-500/30"></div>
@@ -185,7 +183,7 @@ export default function DemoPage() {
 
                             <div className="flex items-center space-x-4">
                                 <div className="bg-cyan-500/20 px-4 py-2 rounded-lg border border-cyan-500/30 min-w-[150px]">
-                                    <div className="text-sm font-semibold text-cyan-300">Visual DNA</div>
+                                    <div className="text-sm font-semibold text-cyan-300">Pattern Grid</div>
                                     <div className="text-xs text-gray-400">10% weight</div>
                                 </div>
                                 <div className="flex-1 h-1 bg-gradient-to-r from-cyan-500/30 to-green-500/30"></div>
@@ -306,13 +304,13 @@ export default function DemoPage() {
                                 <div className="text-2xl">🏆</div>
                                 <div>
                                     <div className="font-semibold text-purple-300">First Browser-Native Implementation</div>
-                                    <div className="text-sm text-gray-400">Quantum-inspired hashing for phishing detection entirely in the browser</div>
+                                    <div className="text-sm text-gray-400">Structural hashing for phishing detection entirely in the browser</div>
                                 </div>
                             </div>
                             <div className="flex items-start space-x-3">
                                 <div className="text-2xl">🧬</div>
                                 <div>
-                                    <div className="font-semibold text-purple-300">Visual DNA Fingerprinting</div>
+                                    <div className="font-semibold text-purple-300">Pattern Grid Fingerprinting</div>
                                     <div className="text-sm text-gray-400">Adapted bioinformatics techniques to cybersecurity domain</div>
                                 </div>
                             </div>
@@ -337,7 +335,7 @@ export default function DemoPage() {
                         <div className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 p-6 rounded-xl border border-blue-500/20">
                             <h3 className="text-lg font-bold text-blue-300 mb-3">🔬 Research Impact</h3>
                             <ul className="space-y-2 text-sm text-gray-300">
-                                <li>• Novel quantum-inspired algorithms</li>
+                                <li>• Novel structural analysis algorithms</li>
                                 <li>• Cross-domain technique adaptation</li>
                                 <li>• Explainable AI methodologies</li>
                                 <li>• Privacy-preserving ML</li>
@@ -399,7 +397,7 @@ export default function DemoPage() {
                                 Phishing Detector Demo
                             </h1>
                             <p className="text-gray-400 text-sm mt-1">
-                                Quantum-Inspired Multi-Modal AI for Real-Time Browser Security
+                                Privacy-First Multi-Modal URL Security
                             </p>
                         </div>
                         <a

@@ -1,0 +1,16 @@
+{
+  "built_at": "2026-03-14T06:57:10.717820+00:00",
+  "total": 1000298,
+  "phishing": 299,
+  "benign": 999999,
+  "splits": {
+    "train": 700208,
+    "val": 150044,
+    "test": 150046
+  },
+  "phishing_ratio": 0.0003,
+  "sources": {
+    "phishing": "PhishTank verified feed (https://phishtank.com)",
+    "benign": "Tranco top-1M (https://tranco-list.eu)"
+  }
+}

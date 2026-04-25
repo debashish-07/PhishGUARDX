@@ -1,11 +1,11 @@
-const ctx: Worker = self as any;
+const mfccCtx: Worker = self as any;
 
-function seededRandom(seed: number) {
+function seededRandomMfcc(seed: number) {
     const x = Math.sin(seed++) * 10000;
     return x - Math.floor(x);
 }
 
-ctx.onmessage = (event: MessageEvent) => {
+mfccCtx.onmessage = (event: MessageEvent) => {
     const { url } = event.data;
 
     let seed = 0;
@@ -17,8 +17,8 @@ ctx.onmessage = (event: MessageEvent) => {
     // Generate audio spectrum data (20 bins)
     const spectrum = [];
     for (let i = 0; i < 20; i++) {
-        spectrum.push(seededRandom(seed + i));
+        spectrum.push(seededRandomMfcc(seed + i));
     }
 
-    ctx.postMessage(spectrum);
+    mfccCtx.postMessage(spectrum);
 };

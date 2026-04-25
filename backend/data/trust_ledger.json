@@ -1,0 +1,502 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-04-24T11:50:37.312738+00:00",
+    "url": "https://linkedin.com",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "block_hash": "5c8fd3d41e4014ce90caebedd368f64c0299e0499fa4a2708b27a89a4a301ee2"
+  },
+  {
+    "index": 1,
+    "timestamp": "2026-04-24T11:50:37.368696+00:00",
+    "url": "https://example.com",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.0,
+    "previous_hash": "5c8fd3d41e4014ce90caebedd368f64c0299e0499fa4a2708b27a89a4a301ee2",
+    "block_hash": "ecbf6d2481de9a4cf576f544d5c94f061d6ece73eeaafb16212ad0673d177527"
+  },
+  {
+    "index": 2,
+    "timestamp": "2026-04-24T11:50:37.424359+00:00",
+    "url": "https://openai.com",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.2424,
+    "previous_hash": "ecbf6d2481de9a4cf576f544d5c94f061d6ece73eeaafb16212ad0673d177527",
+    "block_hash": "66aad41381002dba511a91446e8f3be8b0c40cc30ffecaf1a37203976ef513b3"
+  },
+  {
+    "index": 3,
+    "timestamp": "2026-04-24T11:50:37.510232+00:00",
+    "url": "https://github.com",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.2424,
+    "previous_hash": "66aad41381002dba511a91446e8f3be8b0c40cc30ffecaf1a37203976ef513b3",
+    "block_hash": "d7f90fb7700318fde641e99206f5fb02e686a0a7e6463f6ba47ffda6283581d6"
+  },
+  {
+    "index": 4,
+    "timestamp": "2026-04-24T11:50:37.582098+00:00",
+    "url": "https://wikipedia.org",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.1344,
+    "previous_hash": "d7f90fb7700318fde641e99206f5fb02e686a0a7e6463f6ba47ffda6283581d6",
+    "block_hash": "f34f2352bb2a6703be84c7ea0f87868adfa8d875f20587d8391dafd738bf7312"
+  },
+  {
+    "index": 5,
+    "timestamp": "2026-04-24T11:50:37.658259+00:00",
+    "url": "http://paypa1-verification-login.tk/account/update",
+    "user_id": "anonymous",
+    "result": "phishing",
+    "risk_score": 1.0,
+    "previous_hash": "f34f2352bb2a6703be84c7ea0f87868adfa8d875f20587d8391dafd738bf7312",
+    "block_hash": "ed5163fe0b3dcd3dc52fa35bfe4f36f047876baee089a8db01850b60eb234277"
+  },
+  {
+    "index": 6,
+    "timestamp": "2026-04-24T11:51:05.511189+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "anonymous",
+    "result": "phishing",
+    "risk_score": 1.0,
+    "previous_hash": "ed5163fe0b3dcd3dc52fa35bfe4f36f047876baee089a8db01850b60eb234277",
+    "block_hash": "c55824917313c4106f09307017353d2b141f6e7e5d25d75f710707133e9c0f0e"
+  },
+  {
+    "index": 7,
+    "timestamp": "2026-04-24T11:52:01.444765+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "anonymous",
+    "result": "phishing",
+    "risk_score": 1.0,
+    "previous_hash": "c55824917313c4106f09307017353d2b141f6e7e5d25d75f710707133e9c0f0e",
+    "block_hash": "914b75b5588d659cb8a3c4d736912cbc0b695368a05f1d7571717d1db7644729"
+  },
+  {
+    "index": 8,
+    "timestamp": "2026-04-24T11:55:41.845791+00:00",
+    "url": "https://www.bing.com/search?qs=HS&pq=bing&sk=CSYN1UAS2NLS2AS7LC3LS1HS2&sc=23-4&pglt=395&q=bing+quiz&cvid=a8f42b79c6a646999e387ac955e34b88&gs_lcrp=EgRlZGdlKgcIABAAGPkHMgcIABAAGPkHMgYIARAAGEAyBggCEAAYQDIGCAMQABhAMgYIBBAAGEAyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDwyBggIEEUYPNIBCDE1MjZqMGo3qAIIsAIB&FORM=ANNTA1&PC=ASTS",
+    "user_id": "anonymous",
+    "result": "phishing",
+    "risk_score": 0.8893,
+    "previous_hash": "914b75b5588d659cb8a3c4d736912cbc0b695368a05f1d7571717d1db7644729",
+    "block_hash": "cacdd3fada7f4ffe727e59308580db3d21db2b64e863a0c61017f5e554e0c57f"
+  },
+  {
+    "index": 9,
+    "timestamp": "2026-04-24T11:55:56.951795+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "debug",
+    "result": "phishing",
+    "risk_score": 0.8122,
+    "previous_hash": "cacdd3fada7f4ffe727e59308580db3d21db2b64e863a0c61017f5e554e0c57f",
+    "block_hash": "13d1cdea3b239cf7e66532b4fc07b33548dd3412d2923dba8a0739361b574b94"
+  },
+  {
+    "index": 10,
+    "timestamp": "2026-04-24T11:57:37.207155+00:00",
+    "url": "https://linkedin.com",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "13d1cdea3b239cf7e66532b4fc07b33548dd3412d2923dba8a0739361b574b94",
+    "block_hash": "da1324090d40fe1ab1c5decefcce0d6d5a2c69df8a7ed07ad5aa0e8265c7a3a2"
+  },
+  {
+    "index": 11,
+    "timestamp": "2026-04-24T11:57:37.329641+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "da1324090d40fe1ab1c5decefcce0d6d5a2c69df8a7ed07ad5aa0e8265c7a3a2",
+    "block_hash": "ca9f7597bb8cccb1fdff9ae8b2bdfc18bee0b23b769c8ef18dfcde4e26d1c565"
+  },
+  {
+    "index": 12,
+    "timestamp": "2026-04-24T11:58:53.724149+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "ca9f7597bb8cccb1fdff9ae8b2bdfc18bee0b23b769c8ef18dfcde4e26d1c565",
+    "block_hash": "8db7fa5dd1cf31ad175265a3ddaad6f81be421a89502da532999b1fcd6062e9b"
+  },
+  {
+    "index": 13,
+    "timestamp": "2026-04-24T12:00:12.173508+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "8db7fa5dd1cf31ad175265a3ddaad6f81be421a89502da532999b1fcd6062e9b",
+    "block_hash": "7e754f67dddc983f6ecd2c2fbd6320fef2a448885cb0d8726d689f487ba9df6a"
+  },
+  {
+    "index": 14,
+    "timestamp": "2026-04-24T12:00:12.230558+00:00",
+    "url": "https://linkedin.com",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "7e754f67dddc983f6ecd2c2fbd6320fef2a448885cb0d8726d689f487ba9df6a",
+    "block_hash": "ba83668997f106681035ce1d9c6956509a84f8af06415776e09f31a231770405"
+  },
+  {
+    "index": 15,
+    "timestamp": "2026-04-24T12:00:12.291803+00:00",
+    "url": "https://openai.com",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.2424,
+    "previous_hash": "ba83668997f106681035ce1d9c6956509a84f8af06415776e09f31a231770405",
+    "block_hash": "900fd5cf90653c3abbb1c28daeaedf2435e6076f0d15b996115d10ceba00bd7f"
+  },
+  {
+    "index": 16,
+    "timestamp": "2026-04-24T12:00:12.346880+00:00",
+    "url": "http://paypa1-verification-login.tk/account/update",
+    "user_id": "anonymous",
+    "result": "phishing",
+    "risk_score": 1.0,
+    "previous_hash": "900fd5cf90653c3abbb1c28daeaedf2435e6076f0d15b996115d10ceba00bd7f",
+    "block_hash": "0a46d53584a94f2747add89ac77a02342a7ea9eaa46e9f7c8800cfe767b2383c"
+  },
+  {
+    "index": 17,
+    "timestamp": "2026-04-24T12:00:12.408868+00:00",
+    "url": "http://secure-login-update-account-verify.ru",
+    "user_id": "anonymous",
+    "result": "phishing",
+    "risk_score": 1.0,
+    "previous_hash": "0a46d53584a94f2747add89ac77a02342a7ea9eaa46e9f7c8800cfe767b2383c",
+    "block_hash": "348aba34b702f27a3e1a503affb4d63292e5b9f8f008c781a5df44c25bef08f3"
+  },
+  {
+    "index": 18,
+    "timestamp": "2026-04-24T12:00:53.593981+00:00",
+    "url": "https://www.5movierulz.holiday/bhooth-bangla-2026-hindi/movie-watch-online-free-6773.html",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "348aba34b702f27a3e1a503affb4d63292e5b9f8f008c781a5df44c25bef08f3",
+    "block_hash": "29d694fdc37f89384cf2a8946a825d5b3df8015ad7f66ab6a202f414ab4e82cb"
+  },
+  {
+    "index": 19,
+    "timestamp": "2026-04-24T12:01:10.420040+00:00",
+    "url": "https://app.flowcv.com/resume/content",
+    "user_id": "anonymous",
+    "result": "phishing",
+    "risk_score": 0.7292,
+    "previous_hash": "29d694fdc37f89384cf2a8946a825d5b3df8015ad7f66ab6a202f414ab4e82cb",
+    "block_hash": "edb15a80e48ace57959644c52177302e17f4aaa1a3959587d94ab3911658cd06"
+  },
+  {
+    "index": 20,
+    "timestamp": "2026-04-24T12:01:44.602667+00:00",
+    "url": "https://app.flowcv.com/resume/content",
+    "user_id": "anonymous",
+    "result": "phishing",
+    "risk_score": 0.7292,
+    "previous_hash": "edb15a80e48ace57959644c52177302e17f4aaa1a3959587d94ab3911658cd06",
+    "block_hash": "d3f7f862fcc7832fcc0b24b7da2d0d0b9c359dff934e97a2bfdae5a9b134a1f0"
+  },
+  {
+    "index": 21,
+    "timestamp": "2026-04-24T12:07:01.608118+00:00",
+    "url": "https://linkedin.com",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "d3f7f862fcc7832fcc0b24b7da2d0d0b9c359dff934e97a2bfdae5a9b134a1f0",
+    "block_hash": "55b8673c285dbfe41ec767c87c2c52a7c4c2922a807d3bd5d3d13c38fe6fb5b3"
+  },
+  {
+    "index": 22,
+    "timestamp": "2026-04-24T12:07:01.711783+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "55b8673c285dbfe41ec767c87c2c52a7c4c2922a807d3bd5d3d13c38fe6fb5b3",
+    "block_hash": "c3ab33fbf4de5f75e3a467a62f08ab90a50e3ababea2d23abfb0eb3f1b8a79d5"
+  },
+  {
+    "index": 23,
+    "timestamp": "2026-04-24T12:07:01.815587+00:00",
+    "url": "https://app.flowcv.com/resume/content",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "c3ab33fbf4de5f75e3a467a62f08ab90a50e3ababea2d23abfb0eb3f1b8a79d5",
+    "block_hash": "525d64047ad15adef7e2510c766531de8ef301080f4002d9a53b255139452e69"
+  },
+  {
+    "index": 24,
+    "timestamp": "2026-04-24T12:16:49.352099+00:00",
+    "url": "https://linkedin.com",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.0313,
+    "previous_hash": "525d64047ad15adef7e2510c766531de8ef301080f4002d9a53b255139452e69",
+    "block_hash": "7386fb7040e5397b430568697d53093af182e3454516335859ab9b7b2d01d7df"
+  },
+  {
+    "index": 25,
+    "timestamp": "2026-04-24T12:16:49.369492+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.3032,
+    "previous_hash": "7386fb7040e5397b430568697d53093af182e3454516335859ab9b7b2d01d7df",
+    "block_hash": "b44f3c528f0a9376d4cc6edc05fba43d3f7e197bb1ed57f4d3a48fe098c7dd30"
+  },
+  {
+    "index": 26,
+    "timestamp": "2026-04-24T12:16:49.822515+00:00",
+    "url": "https://app.flowcv.com/resume/content",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.0733,
+    "previous_hash": "b44f3c528f0a9376d4cc6edc05fba43d3f7e197bb1ed57f4d3a48fe098c7dd30",
+    "block_hash": "1d871f0d6edb971f35e840998d5f43c4793164157e4ab53bb9fa2534b247c2fe"
+  },
+  {
+    "index": 27,
+    "timestamp": "2026-04-24T12:17:15.947128+00:00",
+    "url": "https://linkedin.com",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.0313,
+    "previous_hash": "1d871f0d6edb971f35e840998d5f43c4793164157e4ab53bb9fa2534b247c2fe",
+    "block_hash": "672dbe82e34c780bb430ccaa383531093d785144acb4cd232def0a89c8132480"
+  },
+  {
+    "index": 28,
+    "timestamp": "2026-04-24T12:17:15.953122+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.3032,
+    "previous_hash": "672dbe82e34c780bb430ccaa383531093d785144acb4cd232def0a89c8132480",
+    "block_hash": "591aaa0ac9c035cba82a037ffefa724d907771d8eaffb6cec7200a3623ff26f6"
+  },
+  {
+    "index": 29,
+    "timestamp": "2026-04-24T12:17:15.959588+00:00",
+    "url": "https://app.flowcv.com/resume/content",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.0733,
+    "previous_hash": "591aaa0ac9c035cba82a037ffefa724d907771d8eaffb6cec7200a3623ff26f6",
+    "block_hash": "323b3a32a2bfbfb9c86d420bcb7e9c1c4152de1e79e1f88dae50fdf4d0f13f21"
+  },
+  {
+    "index": 30,
+    "timestamp": "2026-04-24T12:20:29.382382+00:00",
+    "url": "https://linkedin.com",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.0313,
+    "previous_hash": "323b3a32a2bfbfb9c86d420bcb7e9c1c4152de1e79e1f88dae50fdf4d0f13f21",
+    "block_hash": "9965d67581f580b15e0003711806fe772333121c1d3b8f8f9463770e38165342"
+  },
+  {
+    "index": 31,
+    "timestamp": "2026-04-24T12:20:29.400881+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.3032,
+    "previous_hash": "9965d67581f580b15e0003711806fe772333121c1d3b8f8f9463770e38165342",
+    "block_hash": "94f34a307f0ed61f9343aba0c758d147ea490b3fbab1ee40806ec590e598d7dd"
+  },
+  {
+    "index": 32,
+    "timestamp": "2026-04-24T12:20:29.413098+00:00",
+    "url": "https://app.flowcv.com/resume/content",
+    "user_id": "test",
+    "result": "safe",
+    "risk_score": 0.0733,
+    "previous_hash": "94f34a307f0ed61f9343aba0c758d147ea490b3fbab1ee40806ec590e598d7dd",
+    "block_hash": "670bd36df9d3d4ded027441811807b8b8359c375e26a5eb765ca90f5c1fc45ca"
+  },
+  {
+    "index": 33,
+    "timestamp": "2026-04-24T12:29:07.967597+00:00",
+    "url": "https://www.bikewale.com/compare-bikes/bmw-f-450-gs-vs-ktm-390-adventure-s/?source=3",
+    "user_id": "debug",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "670bd36df9d3d4ded027441811807b8b8359c375e26a5eb765ca90f5c1fc45ca",
+    "block_hash": "224a57b60aaf27a6187b84fa4a0248d6d960cca94ce32a33db01f3a06189a164"
+  },
+  {
+    "index": 34,
+    "timestamp": "2026-04-24T12:29:08.059433+00:00",
+    "url": "https://app.flowcv.com/resume/content",
+    "user_id": "debug",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "224a57b60aaf27a6187b84fa4a0248d6d960cca94ce32a33db01f3a06189a164",
+    "block_hash": "a3eb4f8664b04e25372f24c6607e862bdbb7e787d71cbb8186ed9325e9c629b1"
+  },
+  {
+    "index": 35,
+    "timestamp": "2026-04-24T12:29:08.155084+00:00",
+    "url": "https://google.com",
+    "user_id": "debug",
+    "result": "safe",
+    "risk_score": 0.0,
+    "previous_hash": "a3eb4f8664b04e25372f24c6607e862bdbb7e787d71cbb8186ed9325e9c629b1",
+    "block_hash": "2433443000ed6da48e5b20f05e4254c6f9b6d4c9d6101dbfeb673bf14eb2fa10"
+  },
+  {
+    "index": 36,
+    "timestamp": "2026-04-24T12:29:08.260450+00:00",
+    "url": "http://paypal-secure-login.com",
+    "user_id": "debug",
+    "result": "phishing",
+    "risk_score": 0.92,
+    "previous_hash": "2433443000ed6da48e5b20f05e4254c6f9b6d4c9d6101dbfeb673bf14eb2fa10",
+    "block_hash": "bcb6dffcde91111595ef20291f1ec0425b287548ca6ef4ac0b3ebe5912c2e8c4"
+  },
+  {
+    "index": 37,
+    "timestamp": "2026-04-25T05:37:25.062482+00:00",
+    "url": "https://amnesty.ca/,0,train,19.0,10.0,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.536886721866664,1.0,0.0,1.0",
+    "user_id": "anonymous",
+    "result": "suspicious",
+    "risk_score": 0.6183,
+    "previous_hash": "bcb6dffcde91111595ef20291f1ec0425b287548ca6ef4ac0b3ebe5912c2e8c4",
+    "block_hash": "5bb830d5ab025766d5e0ccc31ef60fbce58291474ddcea792cb6c921f689c956"
+  },
+  {
+    "index": 38,
+    "timestamp": "2026-04-25T05:37:56.280693+00:00",
+    "url": "https://quebeccinema.ca/,0,val,24.0,15.0,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.823934893975744,1.0,0.0,1.0",
+    "user_id": "anonymous",
+    "result": "suspicious",
+    "risk_score": 0.6188,
+    "previous_hash": "5bb830d5ab025766d5e0ccc31ef60fbce58291474ddcea792cb6c921f689c956",
+    "block_hash": "ee5ddd08ddae80cf2ac4bba7a8ab097be5249554053d3b6eb3fa902a2ed2a9af"
+  },
+  {
+    "index": 39,
+    "timestamp": "2026-04-25T05:38:03.455406+00:00",
+    "url": "http://localhost:3000/",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.0,
+    "previous_hash": "ee5ddd08ddae80cf2ac4bba7a8ab097be5249554053d3b6eb3fa902a2ed2a9af",
+    "block_hash": "ca96fe1020206acb5bdfdc69bffe57c1d8946115b9124879367a2dfeeea4ca4d"
+  },
+  {
+    "index": 40,
+    "timestamp": "2026-04-25T05:38:23.496910+00:00",
+    "url": "https://chatgpt.com/",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.0,
+    "previous_hash": "ca96fe1020206acb5bdfdc69bffe57c1d8946115b9124879367a2dfeeea4ca4d",
+    "block_hash": "d1e3b61955766d83bce2294b0c2210694e49c78b5736d34c674d3b56044e9862"
+  },
+  {
+    "index": 41,
+    "timestamp": "2026-04-25T05:38:33.001441+00:00",
+    "url": "https://chatgpt.com/c",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.3934,
+    "previous_hash": "d1e3b61955766d83bce2294b0c2210694e49c78b5736d34c674d3b56044e9862",
+    "block_hash": "6f4aa21c7670a74b2b300f49f2a279ea8b8e408851cf3349cb067b17279ab68a"
+  },
+  {
+    "index": 42,
+    "timestamp": "2026-04-25T05:38:45.744551+00:00",
+    "url": "https://chatgpt.com/d",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.3934,
+    "previous_hash": "6f4aa21c7670a74b2b300f49f2a279ea8b8e408851cf3349cb067b17279ab68a",
+    "block_hash": "8af33db461085e810f94945a633b845ca8a949c8185de703c6c6afa196f44caa"
+  },
+  {
+    "index": 43,
+    "timestamp": "2026-04-25T05:38:47.947657+00:00",
+    "url": "https://chatgpt.com/q",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.3934,
+    "previous_hash": "8af33db461085e810f94945a633b845ca8a949c8185de703c6c6afa196f44caa",
+    "block_hash": "47be0c84b447f1e38d3691103798255502a183ffffa6605e3126fec50345aee6"
+  },
+  {
+    "index": 44,
+    "timestamp": "2026-04-25T05:38:49.363984+00:00",
+    "url": "https://chatgpt.com/11",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.4131,
+    "previous_hash": "47be0c84b447f1e38d3691103798255502a183ffffa6605e3126fec50345aee6",
+    "block_hash": "1e51261493dfc631c80015a2eedcce4f9ae70493348d4939a54853d281157952"
+  },
+  {
+    "index": 45,
+    "timestamp": "2026-04-25T05:38:52.480889+00:00",
+    "url": "https://chatgpt.com/afAFEWF",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "1e51261493dfc631c80015a2eedcce4f9ae70493348d4939a54853d281157952",
+    "block_hash": "578feb25c43a3209c9b2292b7ef6d5203b38be59b8e2b7088c92500b679ea680"
+  },
+  {
+    "index": 46,
+    "timestamp": "2026-04-25T05:38:53.333921+00:00",
+    "url": "https://chatgpt.com/afAFEWFFQ",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "578feb25c43a3209c9b2292b7ef6d5203b38be59b8e2b7088c92500b679ea680",
+    "block_hash": "e96b18571deed8ed817adc4933da0b653c04fd8a6b9fdd08d06c464aec97a482"
+  },
+  {
+    "index": 47,
+    "timestamp": "2026-04-25T05:38:55.249856+00:00",
+    "url": "https://chatgpt.com/afAFEWFFQffefwfewhfbencfe",
+    "user_id": "anonymous",
+    "result": "suspicious",
+    "risk_score": 0.617,
+    "previous_hash": "e96b18571deed8ed817adc4933da0b653c04fd8a6b9fdd08d06c464aec97a482",
+    "block_hash": "b3a4a07c2d8fd03ccbfe859fba10239af173d24d48c6b9e6349a3e0c89c961fc"
+  },
+  {
+    "index": 48,
+    "timestamp": "2026-04-25T05:39:13.595026+00:00",
+    "url": "https://www.google.com/maps",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.2919,
+    "previous_hash": "b3a4a07c2d8fd03ccbfe859fba10239af173d24d48c6b9e6349a3e0c89c961fc",
+    "block_hash": "76358b58d944a755f535eff9652068a2dd3b02832b0e842f7c0b1e427f476bc3"
+  },
+  {
+    "index": 49,
+    "timestamp": "2026-04-25T05:47:29.770417+00:00",
+    "url": "https://app.flowcv.com/resumes",
+    "user_id": "anonymous",
+    "result": "safe",
+    "risk_score": 0.44,
+    "previous_hash": "76358b58d944a755f535eff9652068a2dd3b02832b0e842f7c0b1e427f476bc3",
+    "block_hash": "4a542bcb8e078b2d3bf92e95277000c2cedc264c7a2bc81bdae29e1e09cc1c24"
+  }
+]
